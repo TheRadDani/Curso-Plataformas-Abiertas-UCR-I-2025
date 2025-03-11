@@ -168,6 +168,7 @@ At the top level of the **Linux filesystem**, you will find the **root directory
 
 ---
 
+![alt text](images/image-2.png)
 
 
 ## Basic Commands to Explore the Filesystem
