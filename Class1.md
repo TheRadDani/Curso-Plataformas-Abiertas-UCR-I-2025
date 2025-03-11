@@ -1,4 +1,6 @@
-# Introduction to GNU/Linux
+# Class 1: Introduction to GNU/Linux
+
+Reference for Bash https://www.gnu.org/software/bash/manual/bash.html
 
 ## What is GNU/Linux?
 
@@ -138,4 +140,219 @@ To uninstall software:
 sudo apt remove package_name  # Debian/Ubuntu
 sudo dnf remove package_name  # Fedora
 sudo pacman -R package_name   # Arch Linux
+```
+
+## Understanding the Linux Filesystem
+
+Unlike Windows, where files are stored under drive letters (e.g., `C:\`), Linux organizes everything into a **single hierarchical directory structure**.
+
+At the top level of the **Linux filesystem**, you will find the **root directory (`/`)**, which contains all other directories. Below is a table summarizing the most important directories:
+
+| Directory | Description |
+|-----------|------------|
+| `/`       | The root directory, the top-level of the filesystem. |
+| `/bin`    | Essential command binaries (e.g., `ls`, `cp`, `mv`). |
+| `/boot`   | Contains bootloader files and the Linux kernel. |
+| `/dev`    | Device files (e.g., hard drives, USBs, and other peripherals). |
+| `/etc`    | Configuration files for the system and applications. |
+| `/home`   | Personal directories for users (e.g., `/home/username`). |
+| `/lib`    | Essential libraries required by the system. |
+| `/mnt`    | Mount point for temporary filesystems or external drives. |
+| `/opt`    | Optional software installed manually by users. |
+| `/proc`   | Virtual filesystem providing information about system processes. |
+| `/root`   | The home directory of the root (admin) user. |
+| `/sbin`   | System binaries used for administrative tasks. |
+| `/tmp`    | Temporary files (cleared on reboot). |
+| `/usr`    | User applications, binaries, and documentation. |
+| `/var`    | Log files, databases, and other variable data. |
+
+---
+
+
+
+## Basic Commands to Explore the Filesystem
+
+Here are some useful commands to explore and interact with the Linux filesystem:
+
+```bash
+ls /       # List all top-level directories in the root filesystem
+cd /etc    # Navigate to the /etc directory
+pwd        # Show the current directory
+du -sh /var/log  # Check the size of the /var/log directory
+df -h      # Show available disk space
+mount      # List mounted filesystems
+```
+
+# GNU/Linux Course - File System Paths
+
+## 1. Absolute vs Relative Paths
+
+### Comparison Table
+| Feature               | Absolute Path                     | Relative Path                  |
+|-----------------------|-----------------------------------|--------------------------------|
+| Starting point        | Root directory (`/`)             | Current working directory      |
+| Identification        | Begins with `/`                   | Never begins with `/`          |
+| Reliability           | Always points to same location   | Depends on current location    |
+| Use case              | Scripts, fixed locations         | Quick navigation, same context |
+| Example               | `/var/log/apache2/error.log`      | `Documents/report.txt`         |
+
+## 2. Special Directory Symbols
+
+### Reference Table
+| Symbol | Name              | Description                          |
+|--------|-------------------|--------------------------------------|
+| `.`    | Current directory | Refers to the present working dir    |
+| `..`   | Parent directory  | One level up in hierarchy           |
+| `~`    | Home directory    | Current user's home (`/home/user/`)  |
+| `-`    | Previous dir      | Last visited directory (with `cd -`) |
+
+## 3. Path Components Explained
+
+```bash
+/home/alice/Documents/report.txt
+├── /     - Root directory
+├── home  - Subdirectory of root
+├── alice - User home directory
+├── Documents - Subdirectory
+└── report.txt - Target file
+
+
+# Show current directory
+```bash
+pwd
+```
+
+# Change to absolute path
+```bash
+cd /usr/share/fonts
+```
+
+# Return to home directory
+```bash
+cd ~  # or just cd
+```
+
+# Go back to previous directory
+```bash
+cd -
+```
+
+# Current location: /home/user
+```bash
+cd Projects                # Enters /home/user/Projects
+cd ../Downloads            # Moves to /home/user/Downloads
+cd ../../var/log           # Error! Relative path exceeds root
+cd ./Documents/../Videos   # Ends up in /home/user/Videos
+```
+
+```bash
+mkdir -p ~/practice/dir1/dir2  # Create nested directories
+touch ~/practice/file{a..d}.txt
+```
+
+## Excercise
+
+# Start at home
+```bash
+cd ~
+```
+
+# 1. Navigate using relative paths
+```bash
+cd practice/dir1
+pwd  # Shows /home/user/practice/dir1
+```
+
+# 2. Move up two levels
+```bash
+cd ../..
+pwd  # Now at /home/user
+```
+
+# 3. Access deep directory using combination
+```bash
+cd ./practice/../practice/dir1/dir2
+pwd  # Now at /home/user/practice/dir1/dir2
+```
+
+# 4. Return to parent's parent using ..
+```bash
+cd ../..
+pwd  # Back to /home/user/practice
+```
+
+# 5. Absolute path jump
+```bash
+cd /etc
+pwd  # Now at /etc
+```
+
+# 6. Return home using tilde
+```bash
+cd ~
+pwd  # Back to /home/user
+```
+
+## 6. Path Resolution Techniques
+# From any location:
+```bash
+cd /var/log/../lib/./  # Resolves to /var/lib
+cd /home/../etc/       # Resolves to /etc
+```
+
+## 7. Common Mistakes & Solutions
+
+| Error                      | Reason                     | Fix                                      |
+|----------------------------|----------------------------|------------------------------------------|
+| `cd: no such directory`    | Typo or missing directory  | Check path with `ls parent`              |
+| `Permission denied`        | Lacking execute permission | Use `ls -l` to verify permissions        |
+| `Not a directory`          | Path component is a file   | Check path components                    |
+| `Too many levels of symlinks` | Circular symbolic links  | Use `ls -l` to inspect links             |
+
+
+## 8. Advanced Navigation Tips
+# Use tab completion
+```bash
+cd /e<tab>/sys<tab>  # Expands to /etc/systemd/
+```
+
+# Push/pop directories
+```bash
+pushd /var/log        # Save current location and move
+popd                   # Return to saved location
+```
+
+# Combine with wildcards
+```bash
+cd /usr/share/*fonts  # Enters first matching dir
+```
+
+## 9. Path-related Utilities
+# Get absolute path of file
+```bash
+readlink -f relative/path.txt
+```
+
+# Find actual path of command
+```bash
+which ls              # Shows /bin/ls
+```
+
+# Resolve symbolic links
+```bash
+realpath ~/.bashrc    # Shows full physical path
+```
+
+## 10. Visual Path Cheat Sheet
+```
+/
+├── home/
+│   └── user/
+│       ├── Documents  ← ~/Documents
+│       └── practice/  ← Current dir (.)
+│           ├── dir1/
+│           │   └── dir2/  ← Child dir
+│           └── filea.txt
+└── var/
+    └── log/  ← Absolute path example
 ```
