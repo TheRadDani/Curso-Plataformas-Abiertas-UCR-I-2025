@@ -216,7 +216,7 @@ mount      # List mounted filesystems
 ├── alice - User home directory
 ├── Documents - Subdirectory
 └── report.txt - Target file
-
+```
 
 # Show current directory
 ```bash
