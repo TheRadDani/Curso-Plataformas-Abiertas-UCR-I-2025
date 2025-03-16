@@ -5,12 +5,12 @@ sudo apt install git -y
 
 ## Set the global Git username
 ```bash
-git config --global user.name "Your Name"
+git config --global user.name "<GitHub User name>"
 ```
 
 ## Set the global Git email
 ```bash
-git config --global user.email "your-email@example.com"
+git config --global user.email "<your-email@example.com>"
 ```
 
 ## Verify the global configuration
