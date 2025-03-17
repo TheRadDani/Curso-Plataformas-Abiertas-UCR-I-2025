@@ -399,7 +399,7 @@ awk '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}$/i' emails.txt
 | In-Place Editing   | Yes (-i)                     | No (needs redirection)          |
 
 # Exercise (Use Exployees.txt file as example and solution in solution1.sh):
-* Replace in file `Exployees.txt` "Engineer" with "Developer"
+* Replace in file `exployees.txt` "Engineer" with "Developer"
 * Delete lines containing "Manager"
 * Add header to file
 * Print names and salaries

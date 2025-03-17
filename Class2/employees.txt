@@ -1,0 +1,3 @@
+John Doe:35:Engineer:45000
+Jane Smith:28:Designer:38000
+Bob Johnson:42:Manager:65000
