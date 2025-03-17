@@ -1,4 +1,4 @@
-## Class 3: Process Management**
+## Class 3: Process Management
 
 
 ## 1. What is a Process?
