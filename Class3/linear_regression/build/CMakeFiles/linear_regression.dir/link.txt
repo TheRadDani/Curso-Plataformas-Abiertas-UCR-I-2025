@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/linear_regression.dir/main.c.o -o linear_regression  -lm 

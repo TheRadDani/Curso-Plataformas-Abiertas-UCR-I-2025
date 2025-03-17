@@ -1,0 +1,3 @@
+/home/daniel/linear_regression/build/CMakeFiles/linear_regression.dir
+/home/daniel/linear_regression/build/CMakeFiles/edit_cache.dir
+/home/daniel/linear_regression/build/CMakeFiles/rebuild_cache.dir
