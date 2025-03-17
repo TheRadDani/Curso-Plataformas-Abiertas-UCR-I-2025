@@ -129,7 +129,7 @@ lsof -p PID
 
 ## Virtual Memory and Its Role in Memory Management
 
-![alt text](images/image-5.png)
+![alt text](../images/image-5.png)
 
 Virtual memory is a concept used by operating systems (OS) to manage memory efficiently and provide the illusion of more memory than what is physically available on a machine. It plays a critical role in modern computing, particularly when dealing with multitasking and process isolation.
 
@@ -192,9 +192,9 @@ sudo sysctl vm.swappiness=<value>
 
 ## Memory Components of a Process:
 
-![alt text](images/image-3.png)
+![alt text](../images/image-3.png)
 
-![alt text](images/image-4.png)
+![alt text](../images/image-4.png)
 
 Code Segment: Contains the program's instructions.
 
