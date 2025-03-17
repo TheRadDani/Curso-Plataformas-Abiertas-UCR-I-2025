@@ -9,6 +9,9 @@
 - A **thread** is a subset of a process. Threads share the same memory and resources as their parent process.
 - Lightweight and faster to create than processes.
 
+## Memory RAM structure
+![alt text](../images/image-6.png)
+
 ---
 
 ## Key Differences: Process vs. Thread
