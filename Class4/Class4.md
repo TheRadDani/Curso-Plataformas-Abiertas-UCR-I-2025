@@ -105,9 +105,14 @@ chmod +x mydaemon.sh
 ```
 
 ```bash
-./mydaemon.sh &
+nohup ./my_daemon.sh &
 ```
 
 ```bash
-ps aux | grep mydaemon
+ps aux | grep my_daemon
+```
+
+## Identify running daemons with:
+```bash
+ps aux | grep "d$"
 ```
