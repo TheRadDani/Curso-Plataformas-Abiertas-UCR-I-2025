@@ -1,4 +1,5 @@
-# Class 1: Introduction to GNU/Linux
+## Class 1: Introduction to GNU/Linux
+# Author: Daniel Ferreto
 
 Reference for Bash https://www.gnu.org/software/bash/manual/bash.html
 

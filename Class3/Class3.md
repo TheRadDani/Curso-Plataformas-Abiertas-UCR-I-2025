@@ -1,5 +1,5 @@
-## Class 3: Process Management
-
+# Class 3: Process Management
+## Author: Daniel Ferreto
 
 ## 1. What is a Process?
 - A **process** is a running instance of a program (e.g., Firefox, Terminal).

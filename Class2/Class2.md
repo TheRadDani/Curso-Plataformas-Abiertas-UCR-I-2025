@@ -1,5 +1,5 @@
-## Class 2: Text Manipulation & Redirection
-
+# Class 2: Text Manipulation & Redirection
+## Author: Daniel Ferreto
 
 ## 1. Script Basics
 
