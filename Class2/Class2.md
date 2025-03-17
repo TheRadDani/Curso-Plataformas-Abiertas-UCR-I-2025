@@ -56,7 +56,7 @@ echo "$name is ${age} years old"  # Both syntaxes work
 | Special       | $0 (script name), $1 (first argument) | Predefined variables  |
 
 ## User Input
-```
+```bash
 # Read from keyboard
 read -p "Enter filename: " filename
 
@@ -67,7 +67,7 @@ echo "Argument count: $#"
 ```
 
 ## Control Structures
-```
+```bash
 if [ $age -ge 18 ]; then
     echo "Adult"
 elif [ $age -gt 12 ]; then
@@ -92,9 +92,9 @@ Comparison Operators:
 * `-f`: File exists
 
 
-Loops
+## Loops
 
-```
+```bash
 # For loop
 for file in *.txt; do
     echo "Processing $file"
@@ -108,8 +108,8 @@ while [ $counter -le 5 ]; do
 done
 ```
 
-Functions
-```
+## Functions
+```bash
 # Define function
 greet() {
     local message="Hello $1!"
@@ -131,9 +131,9 @@ Function Features:
 * Parameters: `$1`, `$2` inside function
 
 
-Exit Codes & Error Handling
+## Exit Codes & Error Handling
 
-```
+```bash
 # Check previous command success
 ls /nonexistent 2>/dev/null
 if [ $? -ne 0 ]; then
@@ -147,8 +147,8 @@ if [ ! -f required.txt ]; then
 fi
 ```
 
-File Operations
-```
+## File Operations
+```bash
 # Read file line by line
 while read line; do
     echo "Line: $line"
@@ -162,7 +162,7 @@ fi
 
 Arithmetic Operations
 
-```
+```bash
 # Integer math
 sum=$((5 + 3))
 ((count++))
@@ -182,7 +182,7 @@ fi
 | `if (( $num1 > $num2 )); then echo "$num1 is greater"; fi` | Compares `num1` and `num2`, echoes if `num1` is greater    |
 
 Practical Examples
-```
+```bash
 #!/bin/bash
 echo "=== System Report ==="
 echo "Date: $(date)"
@@ -193,7 +193,7 @@ df -h | grep -v tmpfs
 ```
 
 Backup Script
-```
+```bash
 #!/bin/bash
 backup_dir="/backups/$(date +%Y-%m-%d)"
 mkdir -p $backup_dir
@@ -276,6 +276,146 @@ grep "192.168.1" access.log | sort > filtered.txt
 find / -name "*.conf" 2> errors.log
 ```
 
+| **Feature**            | **find .**                      | **find /**                       |
+|-------------------------|----------------------------------|-----------------------------------|
+| **Search Scope**        | Current directory and subdirs   | Entire file system               |
+| **Starting Point**      | `.` (current directory)         | `/` (root directory)             |
+| **Speed**               | Faster for localized searches   | Slower due to larger search area |
+| **Access Requirements** | No special permissions needed   | May require `sudo` for some dirs |
+
+
+# Linux Text Processing with `sed` and `awk`
+<a name="introduction"></a>
+## Introduction to Text Processing
+- **Why text processing?** Manipulate log files, transform data, extract information
+- **When to use:**
+  - `sed`: Simple substitutions, line deletions, text replacements
+  - `awk`: Column-based processing, calculations, structured data
+
+<a name="sed"></a>
+## `sed` Stream Editor
+
+### Basic Syntax
+```bash
+sed [options] 'command' file.txt
+```
+
+| Command | Description           | Example                        |
+|---------|-----------------------|--------------------------------|
+| s       | Substitute text       | `sed 's/old/new/' file.txt`    |
+| d       | Delete lines          | `sed '3d' file.txt`           |
+| p       | Print lines           | `sed -n '/pattern/p' file`    |
+| i       | Insert before line    | `sed '2i\new-line' file`      |
+| a       | Append after line     | `sed '2a\new-line' file`      |
+
+
+Key Options
+* `-i`: Edit file in-place
+
+* `-n`: Suppress automatic printing
+
+* `-e`: Combine multiple commands
+
+## Examples:
+```bash
+# Replace "hello" with "hola" in file
+sed 's/hello/hola/g' greetings.txt
+
+# Delete lines 5-10
+sed '5,10d' data.txt
+
+# Multiple commands
+sed -e 's/foo/bar/' -e '/baz/d' file.txt
+```
+
+<a name="awk"></a>
+
+# `awk` Pattern Scanning
+```bash
+awk 'pattern {action}' file.txt
+```
+| Variable | Description                   |
+|----------|-------------------------------|
+| NR       | Current record (line) number |
+| NF       | Number of fields in line     |
+| $0       | Entire line                  |
+| 1,       | First field                  |
+| 1,2      | First, second field          |
+
+```bash
+# Print first column
+awk '{print $1}' data.csv
+
+# Filter lines with value > 100
+awk '$3 > 100 {print $0}' sales.txt
+
+# Calculate total
+awk '{sum += $2} END {print sum}' numbers.txt
+```
+
+
+## Advanced Features
+* Math operations (+, -, *, /)
+
+* String functions (length, substr, tolower)
+
+* BEGIN/END blocks for initialization/cleanup
+
+<a name="regex"></a>
+
+# Regular Expressions (Regex)
+| Pattern | Matches                  | Example                |
+|---------|--------------------------|------------------------|
+| .       | Any single character     | a.c → "abc", "a2c"     |
+| ^       | Start of line            | ^Hello                 |
+| $       | End of line              | world$                 |
+| *       | Zero or more of previous | a* → "", "a", "aaa"    |
+| +       | One or more of previous  | a+ → "a", "aaa"        |
+| []      | Character set            | [A-Za-z]               |
+| \d      | Digit (use [0-9] in awk) | \d{3} → "123"          |
+| `|`     | OR operator              | `cat|dog`              |
+| ()      | Grouping                 | (abc)+ → "abcabc"      |
+
+```bash
+# Find lines starting with "Error"
+sed -n '/^Error/p' logfile.txt
+
+# Find 4-digit numbers
+awk '/[0-9]{4}/ {print $0}' data.txt
+
+# Match email addresses
+awk '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}$/i' emails.txt
+```
+# sed vs awk: Comparison Table
+
+| Feature            | sed                          | awk                             |
+|--------------------|------------------------------|---------------------------------|
+| Primary Purpose    | Text substitution/transforms | Data extraction/reporting       |
+| Line Processing    | Line-oriented                | Field-oriented                  |
+| Variables          | Limited                      | Built-in and custom             |
+| Math Operations    | No                           | Yes                             |
+| Syntax Complexity  | Simple                       | More complex                    |
+| Best For           | Quick edits, regex replaces  | Structured data, columns        |
+| In-Place Editing   | Yes (-i)                     | No (needs redirection)          |
+
+# Exercise (Use Exployees.txt file as example and solution in solution1.sh):
+* Replace in file `Exployees.txt` "Engineer" with "Developer"
+* Delete lines containing "Manager"
+* Add header to file
+* Print names and salaries
+* Calculate average salary
+* Find employees over 30
+* Extract salaries, remove decimals, sum them
+
+# Exercise
+
+* Practice with system logs (/var/log/)
+
+* Process CSV files
+
+* Create cleanup scripts for text files
+
+* Combine with other commands (grep, sort)
 
 ## 4. Text Editing with Nano
 # Open/create file
