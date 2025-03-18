@@ -236,6 +236,11 @@ Common Errors & Solutions
 - `tail -f`: Follow real-time updates (great for logs)
 - `head -n 20`: Customize line count
 
+```bash
+# Show specific lines of a file
+sed -n '5,20p' system_hardware_monitoring.sh
+```
+
 ## 3. Text Processing with grep
 
 ```bash
