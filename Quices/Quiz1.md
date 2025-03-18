@@ -87,7 +87,7 @@ o utilizar el scrip `generate_log.sh` para generar un archivo `.log`.
 ## Instrucciones de Entrega  
 
 1. **Crear un repositorio en GitHub**:  
-   - Nombre: `lab1-[tu nombre]` (ej: `lab1-juan-perez`).  
+   - Nombre: `quiz1-[tu nombre]` (ej: `quiz1-juan-perez`).  
    - Incluir los archivos: `monitor.sh`, `README.md`.  
 
 2. **Configurar GitHub**:  
