@@ -92,6 +92,8 @@ o utilizar el scrip `generate_log.sh` para generar un archivo `.log`.
 
 2. **Configurar GitHub**:  
 ```bash
+cd ~
+mkdir quiz1 && cd quiz1
 git init
 git add .
 git commit -m "Entrega Laboratorio 1"
