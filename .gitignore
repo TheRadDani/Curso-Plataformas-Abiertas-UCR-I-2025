@@ -52,5 +52,5 @@ Mkfile.old
 dkms.conf
 # This is a comment
 
-Quices/Quiz1_solution.sh
+Quices/Quiz1/Quiz1_solution.sh
 Labs/monitor.sh
