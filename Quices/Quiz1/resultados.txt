@@ -1,0 +1,3 @@
+[Line 1] # Generar un archivo de logs con 15 líneas que contienen "ERROR" y 5 líneas con "INFO"
+[Line 5]     echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: Problema en el servicio $i"
+[Line 13] echo "./process_logs.sh access.log ERROR"
