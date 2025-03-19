@@ -75,8 +75,33 @@ Si el proceso se detiene, el script debe finalizar y guardar el motivo en el rep
 
 5. **Manejo de errores**:  
    - Si no hay argumentos: `if [ $# -eq 0 ]; then...`.  
-   - Si el proceso termina: `kill -0 $PID` retornará error.  
+   - Si el proceso termina: `kill -0 $PID` retornará error.
 
+6. **Calcular estadísticas de memoria**:
+   ```bash
+   # Calcular estadísticas
+   MAX_MEM=$(printf "%s\n" "${MEMORY_VALUES[@]}" | sort -nr | head -1)
+   MIN_MEM=$(printf "%s\n" "${MEMORY_VALUES[@]}" | sort -n | head -1)
+   AVG_MEM=$(printf "%s\n" "${MEMORY_VALUES[@]}" | awk '{sum+=$1; count+=1} END {if (count > 0) printf "%.1f", sum/count; else print "0"}')
+   ```
+
+7. **Generar entradas para el reporte .md**Ñ
+```bash
+echo "# Reporte de Monitoreo - $PROCESS_NAME" > "$REPORT_FILE"
+echo "## Fecha: $(date)" >> "$REPORT_FILE"
+echo "## PID Monitoreado: $PID" >> "$REPORT_FILE"
+echo "### Resumen:" >> "$REPORT_FILE"
+echo "- **Tiempo Total de Monitoreo:** $TOTAL_TIME segundos" >> "$REPORT_FILE"
+echo "- **Uso Máximo de Memoria:** ${MAX_MEM}MB" >> "$REPORT_FILE"
+echo "- **Uso Mínimo de Memoria:** ${MIN_MEM}MB" >> "$REPORT_FILE"
+echo "- **Uso Promedio de Memoria:** ${AVG_MEM}MB" >> "$REPORT_FILE"
+echo "### Logs:" >> "$REPORT_FILE"
+echo "\`\`\`" >> "$REPORT_FILE"
+cat "$LOG_FILE" >> "$REPORT_FILE"
+echo "\`\`\`" >> "$REPORT_FILE"
+
+echo "Monitoreo finalizado. Reporte generado en: $REPORT_FILE"
+```
 ---
 
 ## Instrucciones de Entrega  
