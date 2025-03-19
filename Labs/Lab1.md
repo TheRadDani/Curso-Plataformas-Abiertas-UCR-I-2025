@@ -61,7 +61,8 @@ Si el proceso se detiene, el script debe finalizar y guardar el motivo en el rep
 2. **Extraer estadísticas**:  
    - Para memoria: `ps -p "$PID" -o rss=`.  
    - Para tiempo de ejecución: `ps -p $PID -o etime --no-headers`.  
-   - Usa `awk` para formatear decimales: `awk '{printf "%.1f", $1}'`.  
+   - Usa `awk` para formatear decimales: `awk '{printf "%.1f", $1}'`. 
+   - Convertir datos de uso de momeria a mb: `awk '{printf "%.1f", $1 / 1024}'`.
 
 3. **Bucle de monitoreo**:  
    - Usa `while kill -0 $PID 2>/dev/null` para verificar si el proceso está activo.  
