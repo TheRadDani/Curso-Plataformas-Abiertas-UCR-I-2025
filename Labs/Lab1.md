@@ -82,7 +82,22 @@ Si el proceso se detiene, el script debe finalizar y guardar el motivo en el rep
    # Calcular estadísticas
    MAX_MEM=$(printf "%s\n" "${MEMORY_VALUES[@]}" | sort -nr | head -1)
    MIN_MEM=$(printf "%s\n" "${MEMORY_VALUES[@]}" | sort -n | head -1)
-   AVG_MEM=$(printf "%s\n" "${MEMORY_VALUES[@]}" | awk '{sum+=$1; count+=1} END {if (count > 0) printf "%.1f", sum/count; else print "0"}')
+   # Solución corregida para calcular el promedio
+   SUM=0
+   COUNT=0
+
+   # Recorrer los valores de memoria y sumarlos
+   for VALUE in "${MEMORY_VALUES[@]}"; do
+      SUM=$(echo "$SUM + $VALUE" | bc)
+      COUNT=$((COUNT + 1))
+   done
+
+   # Manejar la división con bc para mayor precisión
+   if [ "$COUNT" -gt 0 ]; then
+      AVG_MEM=$(echo "scale=1; $SUM / $COUNT" | bc)
+   else
+      AVG_MEM=0
+   fi
    ```
 
 7. **Generar entradas para el reporte .md**Ñ
