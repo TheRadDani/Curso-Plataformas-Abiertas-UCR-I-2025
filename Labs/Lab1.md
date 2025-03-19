@@ -59,7 +59,7 @@ Si el proceso se detiene, el script debe finalizar y guardar el motivo en el rep
    - Verifica si el PID existe con `[ -z "$PID" ]`.  
 
 2. **Extraer estadísticas**:  
-   - Para memoria: `ps -p $PID -o %mem --no-headers`.  
+   - Para memoria: `ps -p "$PID" -o rss=`.  
    - Para tiempo de ejecución: `ps -p $PID -o etime --no-headers`.  
    - Usa `awk` para formatear decimales: `awk '{printf "%.1f", $1}'`.  
 

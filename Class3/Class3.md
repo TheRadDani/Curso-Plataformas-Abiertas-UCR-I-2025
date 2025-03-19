@@ -83,6 +83,9 @@ Basic Process Commands:
 # List active processes
 ps aux
 
+# Order processes by PID and memory consumption
+ps -e -o pid,%mem,cmd --sort=-%mem | head -n 20
+
 # List processes in real-time (exit with Ctrl+C)
 top
 
