@@ -26,8 +26,8 @@ Desarrollar un script en Bash que monitoree un proceso específico, analice sus 
 Imagina que trabajas como administrador de sistemas y debes garantizar que un servicio crítico (por ejemplo, `gedit`) funcione correctamente. Para ello, necesitas:  
 
 1. **Monitorear el proceso**: Obtener su PID, uso de memoria y tiempo de ejecución.  
-2. **Generar un log**: Registrar cada 10 segundos el estado del proceso.  
-3. **Crear un reporte**: Al finalizar, mostrar un resumen con:  
+2. **Generar un log (<archivo>.log)**: Registrar cada 10 segundos el estado del proceso.  
+3. **Crear un reporte de formato .md**: Al finalizar, mostrar un resumen con:  
    - Máximo y mínimo uso de memoria.  
    - Tiempo total de monitoreo.  
    - Promedio de uso de memoria.  
