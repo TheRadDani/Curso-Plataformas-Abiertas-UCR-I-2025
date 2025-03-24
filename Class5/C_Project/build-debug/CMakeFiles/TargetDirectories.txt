@@ -1,0 +1,3 @@
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/C_Project/build-debug/CMakeFiles/myprogram.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/C_Project/build-debug/CMakeFiles/edit_cache.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/C_Project/build-debug/CMakeFiles/rebuild_cache.dir

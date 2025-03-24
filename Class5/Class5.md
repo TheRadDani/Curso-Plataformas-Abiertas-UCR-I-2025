@@ -301,6 +301,248 @@ qemu-riscv64 ./main.elf
 qemu-system-riscv64 -nographic -machine virt -kernel main.elf
 ```
 
+# Building Projects: Make, CMake, and Yocto
+
+
+In modern embedded systems and software development, build systems play a crucial role in automating the compilation and linking process. Three of the most widely used build systems are:
+
+1. Make – A traditional build automation tool using `Makefiles`.
+
+2. CMake – A meta-build system that generates `Makefiles`, `Ninja` files, or project files for different platforms.
+
+3. Yocto – A system for building complete embedded Linux distributions from source.
+
+## Make
+`make` is a tool that automates the build process using a file called a Makefile. It defines rules to compile and link source files efficiently.
+
+* Makefile: A script defining rules to build targets from dependencies.
+
+* Target: The file to be generated (e.g., an executable).
+
+* Dependencies: Files required to build the target.
+
+* Rules: Commands to generate the target from dependencies.
+
+```make
+# Define the compiler
+CC = gcc
+
+# Compiler flags
+CFLAGS = -Wall -Wextra -g
+
+# Source files
+SRCS = main.c utils.c
+
+# Object files
+OBJS = main.o utils.o
+
+# Output executable
+TARGET = myprogram
+
+# Default rule to build the target
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+
+# Rule for compiling .c files into .o files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean rule to remove generated files
+clean:
+	rm -f $(OBJS) $(TARGET)
+```
+
+* Variables (CC, CFLAGS, SRCS, etc.)
+
+  * CC = gcc → Defines the compiler (gcc).
+
+  * CFLAGS = -Wall -Wextra -g → Adds extra warnings and debugging symbols.
+
+* Target ($(TARGET))
+  * The rule builds myprogram from object files.
+  * $(CC) $(CFLAGS) -o $(TARGET) $(OBJS) → Links all object files.
+
+* Pattern Rule (%.o: %.c)
+  * This tells make how to compile `.c` files into `.o` object files.
+  * `$<` → Refers to the input file (.c file).
+  * `$@` → Refers to the output file (.o file).
+
+* Clean Rule (clean)
+
+  * Deletes object files and the executable.
+
+## Example of Makefile
+```make
+CC = gcc
+CFLAGS = -Wall -g
+
+# Build the final executable
+main: main.o utils.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Compile source files to object files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
+
+# Clean build artifacts
+.PHONY: clean
+clean:
+	rm -f main *.o
+```
+
+Key Variables:
+
+* $@: Target name.
+
+* $<: First dependency.
+
+* $^: All dependencies.
+
+# Advanced Make Features
+
+Automatic Dependency Generation:
+
+```make
+DEPFLAGS = -MMD -MP
+CFLAGS += $(DEPFLAGS)
+
+# Include generated dependency files
+-include $(wildcard *.d)
+```
+
+Parallel Builds:
+
+```bash
+make -j$(nproc)
+```
+
+Conditional Logic:
+
+```make
+DEBUG ?= 1
+ifeq ($(DEBUG), 1)
+CFLAGS += -DDEBUG
+endif
+```
+
+## CMake: Modern Cross-Platform Build System
+
+* Unlike Make, which is system-dependent, CMake can generate Makefiles, Ninja build files, and Visual Studio project files.
+
+* It provides a more flexible way to handle dependencies and configuration.
+
+## CMake
+- Cross-platform compatibility.
+- Automatically handles dependencies.
+- Simplifies large project builds.
+- Supports a wide range of compilers and build tools.
+---
+
+Basic CMake Workflow
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(MyProject)
+
+# Add executable
+add_executable(main main.c utils.c)
+
+# Set compiler flags
+target_compile_options(main PRIVATE -Wall -g)
+
+# Link libraries (e.g., pthread)
+target_link_libraries(main PRIVATE pthread)
+```
+
+* `cmake_minimum_required(VERSION 3.10)` → Ensures compatibility with CMake 3.10 or later.
+
+* `project(MyProject)` → Defines the project name.
+
+* `set(CMAKE_C_STANDARD 11)` → Specifies C11 standard.
+
+* `add_executable(myprogram main.c utils.c)` → Defines the executable target.
+
+* `target_compile_options(myprogram PRIVATE -Wall -Wextra -g)` → Sets compilation flags.
+
+* `target_link_libraries(myprogram PRIVATE pthread)` → Links against `pthread`.
+
+Definning variables
+```cmake
+# Define variables
+set(SOURCES main.c utils.c)
+set(CMAKE_C_STANDARD 11)
+
+# Use variables
+add_executable(main ${SOURCES})
+```
+
+Build
+```bash
+mkdir build && cd build
+cmake ..  # Generate build system (e.g., Makefiles)
+make      # Compile
+```
+
+## Handling External Libraries (FindPackage and FetchContent)
+CMake allows integration of external libraries using find_package and FetchContent.
+```cmake
+find_package(OpenSSL REQUIRED)
+target_link_libraries(myprogram PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+```
+
+## Example: Fetching a Library with FetchContent
+```cmake
+include(FetchContent)
+FetchContent_Declare(
+    json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.10.5
+)
+FetchContent_MakeAvailable(json)
+target_link_libraries(myprogram PRIVATE nlohmann_json::nlohmann_json)
+```
+
+# Yocto – The Embedded Linux Build System
+Yocto is a tool for building embedded Linux distributions from scratch. Unlike `Make` and `CMake`, which compile programs, Yocto builds entire OS images with all necessary libraries and dependencies.
+
+
+## Key Components of Yoct
+* BitBake → The build engine that processes recipes (.bb files).
+
+* Layers → Collections of recipes and configurations.
+
+* Recipes (.bb files) → Instructions on how to fetch, configure, build, and install a package.
+
+
+## Writing a Simple Yocto Recipe (hello.bb)
+This is a BitBake recipe to compile a simple C program `(hello.c)` into an embedded Linux package.
+
+```bitbake
+SUMMARY = "A simple Hello World program"
+DESCRIPTION = "This package prints Hello, World!"
+LICENSE = "MIT"
+SRC_URI = "file://hello.c"
+
+S = "${WORKDIR}"
+
+do_compile() {
+    ${CC} hello.c -o hello
+}
+
+do_install() {
+    install -D -m 0755 ${S}/hello ${D}${bindir}/hello
+}
+```
+
+## SUMMARY, DESCRIPTION → Metadata about the package.
+
+* LICENSE → Defines the license.
+
+* SRC_URI = "file://hello.c" → Fetches hello.c from local files.
+
+* do_compile() → Compiles hello.c.
+
+* do_install() → Installs the compiled binary into the correct location.
+
 # Further Resources
 
 ## Books:

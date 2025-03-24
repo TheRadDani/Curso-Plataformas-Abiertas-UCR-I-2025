@@ -82,7 +82,6 @@ Si el proceso se detiene, el script debe finalizar y guardar el motivo en el rep
    # Calcular estadísticas
    MAX_MEM=$(printf "%s\n" "${MEMORY_VALUES[@]}" | sort -nr | head -1)
    MIN_MEM=$(printf "%s\n" "${MEMORY_VALUES[@]}" | sort -n | head -1)
-   # Solución corregida para calcular el promedio
    SUM=0
    COUNT=0
 
@@ -100,7 +99,7 @@ Si el proceso se detiene, el script debe finalizar y guardar el motivo en el rep
    fi
    ```
 
-7. **Generar entradas para el reporte .md**Ñ
+7. **Generar entradas para el reporte .md**
 ```bash
 echo "# Reporte de Monitoreo - $PROCESS_NAME" > "$REPORT_FILE"
 echo "## Fecha: $(date)" >> "$REPORT_FILE"
