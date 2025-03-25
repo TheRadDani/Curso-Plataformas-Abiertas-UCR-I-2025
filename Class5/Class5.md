@@ -13,6 +13,12 @@ Key concepts:
 - **CISC** vs **RISC**: Complex vs Reduced Instruction Set Computing
 - **Endianness**: Byte ordering in memory (Little-endian/Big-endian)
 
+```bash
+lscpu | grep "Byte Order"
+```
+
+![alt text](../images/image-8.png)
+
 ## Common Architectures in Ubuntu
 ### 1. x86/x86-64
 - Dominant in desktop/laptop computers
