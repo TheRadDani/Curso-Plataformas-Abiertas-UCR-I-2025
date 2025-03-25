@@ -686,10 +686,11 @@ Yocto offers several tools to streamline development:
 
 ## Step 1: Set Up Yocto Environment
 1. Clone the Yocto Project repository:
-   ```bash
+```bash
    git clone git://git.yoctoproject.org/poky
    cd poky
    git checkout kirkstone  # Use the latest stable branch
+```
 
 2. Download the Raspberry Pi BSP layer:
 ```bash
