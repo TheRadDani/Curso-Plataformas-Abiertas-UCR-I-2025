@@ -670,67 +670,76 @@ Yocto offers several tools to streamline development:
 
 * do_install() → Installs the compiled binary into the correct location.
 
-## Real-World Example: Yocto on Raspberry Pi 5
+## Yocto on Raspberry Pi 5: A Practical Guide
 
 ### Prerequisites
-1. **Hardware**:
-   - Raspberry Pi 5 board.
-   - MicroSD card (32GB or higher, formatted to FAT32).
-   - Power supply and peripherals (keyboard, mouse, monitor).
 
-2. **Software**:
-   - A Linux-based development machine (Ubuntu is recommended).
-   - Yocto Project installed (refer to the [Yocto Quick Build Guide](https://docs.yoctoproject.org/)).
+#### Hardware Requirements:
+- **Raspberry Pi 5** board
+- **MicroSD card** (32GB or higher, formatted to FAT32)
+- **Power supply and peripherals** (keyboard, mouse, monitor)
+
+#### Software Requirements:
+- **Linux-based development machine** (Ubuntu recommended)
+- **Yocto Project installed** ([Yocto Quick Build Guide](https://docs.yoctoproject.org/))
 
 ---
 
-## Step 1: Set Up Yocto Environment
-1. Clone the Yocto Project repository:
+## Step 1: Set Up the Yocto Environment
+
+### 1. Clone the Yocto Project Repository
 ```bash
+   sudo apt update
+   sudo apt install chrpath liblz4-tool
+
    git clone git://git.yoctoproject.org/poky
    cd poky
    git checkout kirkstone  # Use the latest stable branch
+   source oe-init-build-env # creates build folder
 ```
 
-2. Download the Raspberry Pi BSP layer:
+### 2. Download the Raspberry Pi BSP Layer
 ```bash
 git clone git://git.yoctoproject.org/meta-raspberrypi
 ```
 
-3. Add the BSP layer to your build configuration:
-
+### 3. Add the BSP Layer to the Build Configuration
 Edit `conf/bblayers.conf` and add the path to `meta-raspberrypi`:
-
 ```bash
-BBLAYERS += "/path/to/meta-raspberrypi"
+BBLAYERS += "/absolute/path/to/meta-raspberrypi"
 ```
+
+---
 
 ## Step 2: Create a Custom Layer
-1. Generate a new layer:
+
+### 1. Generate a New Layer
 ```bash
-yocto-layer create meta-custom
+bitbake-layers create-layer ~/poky/meta-custom
 ```
 
-2. Add the custom layer to `bblayers.conf`:
+### 2. Add the Custom Layer to `bblayers.conf`
 ```bash
-BBLAYERS += "/path/to/meta-custom"
+BBLAYERS += "/absolute/path/to/meta-custom"
 ```
+
+---
 
 ## Step 3: Write a Recipe for "Hello, World!"
-Create a directory for your recipe:
 
+### 1. Create a Directory for Your Recipe
 ```bash
 mkdir -p meta-custom/recipes-example/hello-world
 ```
 
-Write the ```hello-world.bb recipe```:
+### 2. Write the `hello-world.bb` Recipe
+Create a file `meta-custom/recipes-example/hello-world/hello-world.bb` with the following content:
 ```bitbake
 SUMMARY = "Hello World Application"
 DESCRIPTION = "A simple Hello World program for Raspberry Pi 5"
 LICENSE = "MIT"
 SRC_URI = "file://hello.c"
 
-S = "${WORKDIR}"
 
 do_compile() {
     ${CC} hello.c -o hello
@@ -740,7 +749,15 @@ do_install() {
     install -D -m 0755 ${S}/hello ${D}${bindir}/hello
 }
 ```
-source `hello.c` file
+
+```bash
+cd ~/poky/meta-custom/recipes-example/hello-world/
+mkdir -p files
+```
+
+
+### 3. Create the `hello.c` Source File in `files` dir:
+Create `meta-custom/recipes-example/hello-world/files/hello.c`:
 ```c
 #include <stdio.h>
 int main() {
@@ -749,22 +766,27 @@ int main() {
 }
 ```
 
-Place hello.c in the same directory as the recipe.
-
+---
 
 ## Step 4: Build the Image
-Configure the build for Raspberry Pi 5:
 
-Edit ```conf/local.conf``` and set the machine:
+### 1. Configure the Build for Raspberry Pi 5
+Edit `conf/local.conf` and set the machine:
 ```bash
 MACHINE = "raspberrypi5"
 ```
-Build the image:
+
+### 2. Build the Image
 ```bash
 bitbake core-image-minimal
 ```
 
+---
+
 ## Step 5: Deploy the Image
+
+### 1. Flash the Built Image to the SD Card
+Replace `/dev/sdX` with the correct device name for your SD card:
 ```bash
 sudo dd if=tmp/deploy/images/raspberrypi5/core-image-minimal-raspberrypi5.wic of=/dev/sdX bs=4M
 sync
