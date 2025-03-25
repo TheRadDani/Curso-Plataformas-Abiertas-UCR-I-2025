@@ -1,0 +1,5 @@
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/CMakeFiles/myprogram.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/CMakeFiles/edit_cache.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/CMakeFiles/rebuild_cache.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-build/CMakeFiles/edit_cache.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,14 @@
+# Target labels
+ json-populate
+# Source files and their labels
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/CMakeFiles/json-populate
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/CMakeFiles/json-populate.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/CMakeFiles/json-populate-complete.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-build.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-configure.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-download.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-install.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-mkdir.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-patch.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-test.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class5/test/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-update.rule
