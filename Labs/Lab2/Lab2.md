@@ -11,7 +11,7 @@
 </div>
 
 # Laboratorio 2: Redes de Computadoras
-**Fecha de Entrega:** 11 de abril, 12:00 pm  
+**Fecha de Entrega:** 13 de abril, 12:00 pm  
 **Modalidad de Entrega:** Repositorio de GitHub (compartir enlace con el profesor)  
 **Laboratorio individual**  
 ---
@@ -81,7 +81,7 @@ Enviar el enlace al correo del profesor antes de la fecha límite.
 ```
 
 # Ejecutar el script
-bash check_dns.sh gedit
+bash check_dns.sh
 
 ```
 
