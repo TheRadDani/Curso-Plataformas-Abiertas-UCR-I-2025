@@ -1,0 +1,4 @@
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class6/build/CMakeFiles/main.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class6/build/CMakeFiles/generate_assembly.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class6/build/CMakeFiles/edit_cache.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class6/build/CMakeFiles/rebuild_cache.dir
