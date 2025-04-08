@@ -17,12 +17,13 @@ void addStudent(struct Student **students, int *count) {
         exit(1);
     }
 
+    struct Student *studentPtr = &(*students)[*count];
     printf("Enter student name: ");
-    scanf("%s", (*students)[*count].name);
+    scanf("%s", studentPtr->name);
     printf("Enter student age: ");
-    scanf("%d", &(*students)[*count].age);
+    scanf("%d", &studentPtr->age);
     printf("Enter student GPA: ");
-    scanf("%f", &(*students)[*count].gpa);          
+    scanf("%f", &studentPtr->gpa);       
 
     // Increment the student count
     (*count)++;
@@ -61,7 +62,7 @@ int main () {
                 printf("Invalid choice! Please try again.\n");
         }
 
-    }   while (choice!=3);
+    }   while (choice!='3');
 
 
     free(students);
