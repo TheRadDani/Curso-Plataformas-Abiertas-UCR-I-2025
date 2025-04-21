@@ -1,0 +1,1 @@
+/usr/bin/cc -Wall -O2 CMakeFiles/peripheral_comm.dir/example14.c.o -o peripheral_comm 
