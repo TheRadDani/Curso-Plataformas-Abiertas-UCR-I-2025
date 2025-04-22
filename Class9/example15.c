@@ -3,6 +3,11 @@
 * Example: Vectorized addition using AVX2 intrinsics.
 */
 
+/*
+Instead of writing low-level assembly, intrinsics allow 
+developers to access CPU vectorized instructions directly using C/C++ functions.
+*/ 
+
 #include <immintrin.h>
 #include <stdio.h>
 
