@@ -10,6 +10,30 @@
 #include <stdlib.h>
 
 int main() {
+    // calloc vs malloc
+    int *p1 = calloc(4, sizeof(int));
+    if (p1 == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    int *p2 = calloc(1, sizeof(int[4]));
+    if (p2 == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    int *p3 = calloc(4, sizeof *p3);
+    if (p3 == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    int *arr = (int*)malloc(4 * sizeof(int));
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+
     // Dangling Pointer (points to freed memory)
     int *ptr = (int*)malloc(sizeof(int));
     *ptr = 5;
