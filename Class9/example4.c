@@ -19,6 +19,9 @@ struct SensorData {
 int main() {
     struct SensorData data;
 
+    // Initialize sensor data
+    memset(&data, 0, sizeof(data)); // Clear memory
+
     // Write to file
     FILE *file = fopen("sensor_log.txt", "w");
     if (file == NULL) {
@@ -34,6 +37,8 @@ int main() {
     strcpy(data.sensor_name, "Memristor");
     data.value = 77.5;
     data.timestamp = 1626300001;
+
+    printf("%s %f %d\n", data.sensor_name, data.value, data.timestamp);
 
     // Read from file
     file = fopen("sensor_log.txt", "r");

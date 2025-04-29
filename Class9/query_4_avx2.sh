@@ -1,1 +1,1 @@
-clang -mavx2 -O2 -march=native -o avx_check example17.c
+clang -mavx2 -O3 -march=native -o avx_check example17.c

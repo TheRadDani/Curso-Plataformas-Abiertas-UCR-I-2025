@@ -11,7 +11,7 @@
 
 // Simulate a hardware register at address 0x40000000
 //#define STATUS_REGISTER (*(volatile uint32_t*)0x40000000)
-volatile uint32_t STATUS_REGISTER = 0; 
+volatile uint32_t STATUS_REGISTER = 0;
 
 int main() {
     // Read status register (e.g., check sensor flag)

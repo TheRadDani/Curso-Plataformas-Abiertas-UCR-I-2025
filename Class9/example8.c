@@ -26,7 +26,7 @@ int main() {
     printf("\n"); // Output: P u r d u e
 
     // String functions
-    char buffer[20];
+    char buffer[20]; // Buffer for string manipulation
     strcpy(buffer, "EE ");   // Copy "EE " into buffer
     strcat(buffer, "2024");  // Append "2024" to buffer
     printf("%s\n", buffer);  // Output: EE 2024

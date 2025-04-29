@@ -5,7 +5,7 @@
 // Function to check AVX2 support using CPUID
 int is_avx2_supported() {
     uint32_t eax, ebx, ecx, edx;
-    eax = 7;  // Extended features query
+    eax = 7;  // Extended features query, eax = 1 => general CPU features
     ecx = 0;
 
     // Execute CPUID
