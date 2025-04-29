@@ -1,0 +1,1 @@
+xxd -i tiny_sine_model.pth > model.h

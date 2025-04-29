@@ -1,0 +1,14 @@
+# Target labels
+ picotoolBuild
+# Source files and their labels
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/CMakeFiles/picotoolBuild
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/CMakeFiles/picotoolBuild.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/CMakeFiles/picotoolBuild-complete.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/picotool/src/picotoolBuild-stamp/picotoolBuild-build.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/picotool/src/picotoolBuild-stamp/picotoolBuild-configure.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/picotool/src/picotoolBuild-stamp/picotoolBuild-download.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/picotool/src/picotoolBuild-stamp/picotoolBuild-install.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/picotool/src/picotoolBuild-stamp/picotoolBuild-patch.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/picotool/src/picotoolBuild-stamp/picotoolBuild-test.rule
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/build/picotool/src/picotoolBuild-stamp/picotoolBuild-update.rule

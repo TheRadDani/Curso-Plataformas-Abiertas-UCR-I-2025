@@ -61,6 +61,24 @@ void encrypt_file(const char *input_filename, const char *output_filename, unsig
 }
 ```
 
+## Ejemplo de encriptar estructura en archivo
+```c
+int main() {
+    Sensor sensor = {1, 25.5f, "2023-10-25 12:00:00"};
+    
+    // Guardar estructura en archivo temporal sin encriptar
+    FILE *temp = fopen("temp.bin", "wb");
+    fwrite(&sensor, sizeof(Sensor), 1, temp);
+    fclose(temp);
+
+    // Encriptar el archivo con XOR (clave 0xAB)
+    encrypt_file("temp.bin", "sensor_encrypted.bin", 0xAB);
+    remove("temp.bin"); // Eliminar temporal
+
+    return 0;
+}
+```
+
 ## Notas
 - Estructura original del `Sensor`:
   ```c

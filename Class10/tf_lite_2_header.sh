@@ -1,0 +1,1 @@
+xxd -i sine_model.tflite > model.h

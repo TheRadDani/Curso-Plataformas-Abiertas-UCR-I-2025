@@ -1,0 +1,3 @@
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/tf_lite_deploy/build/CMakeFiles/firmware.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/tf_lite_deploy/build/CMakeFiles/edit_cache.dir
+/home/daniel/Curso-Plataformas-Abiertas-UCR-I-2025/Class10/tf_lite_deploy/build/CMakeFiles/rebuild_cache.dir
