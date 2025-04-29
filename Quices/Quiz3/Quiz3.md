@@ -107,7 +107,7 @@ int main() {
 2. **Configurar GitHub**:  
 ```bash
 cd ~
-mkdir quiz2 && cd quiz2
+mkdir quiz2 && cd quiz3
 git init
 git add .
 git commit -m "Entrega Laboratorio 1"
