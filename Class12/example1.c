@@ -76,6 +76,40 @@ NeuralNetwork* create_neuronal_nertwork(const size_t* layer_sizes, size_t num_la
         return NULL;
     }
 
+    /* Copy Layer sizes */
+    if(memcpy(network->layer_sizes, layer_sizes, num_layers * sizeof(size_t)) != network->layer_sizes) {
+        fprintf(stderr, "Error: Memory copy failed.\n");
+        free(network->layer_sizes);
+        free(network->layers);
+        free(network);
+        return NULL;
+    }
+
+    /* Initialize each layer */
+    for(size_t i=0; i<num_layers; i++) {
+        /* Validate layer size */
+        if(layer_sizes[i] == 0) {
+            fprintf(stderr, "Error: Layer size cannot be zero.\n");
+            /* Clean up already allocated memory */
+            for(size_t j=0; j<i;j++) {
+                for(size_t k=0; k < network->layers[j].num_neurons; k++) {
+                    free(network->layers[j].neurons[k].weights);
+                }
+                free(network->layers[j].neurons);
+            }
+            free(network->layer_sizes);
+            free(network->layers);
+            free(network);
+            return NULL;
+        }
+
+        /* Set number of neurons in this layer */
+        network->layers[i].num_neurons = layer_sizes[i];
+
+        /* Allocate memory for neurons */
+        network->layers[i].neurons = (Neuron*)calloc(layer_sizes[i], sizeof(Neuron));
+    }
+
 }
 
 
