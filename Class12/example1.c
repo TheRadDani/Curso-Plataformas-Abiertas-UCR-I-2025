@@ -135,7 +135,33 @@ NeuralNetwork* create_neuronal_nertwork(const size_t* layer_sizes, size_t num_la
                 network->layers[i].neurons[j].weights = NULL;
                 continue;
             }
+
+            /* Allocate memory for weights */
+            size_t num_weights = layer_sizes[i-1];
+            network->layers[i].neurons[j].num_weights = num_weights;
+            network->layers[i].neurons[j].weights = (double*)calloc(num_weights, sizeof(double));
+            if(network->layers[i].neurons[j].weights == NULL) {
+                fprintf(stderr, "Error: Memory allocation failed.\n");
+                /* Clean up already allocated memory */
+                for(size_t k=0; k < j; k++) {
+                    free(network->layers[i].neurons[k].weights);
+                }
+                free(network->layers[i].neurons);
+                for(size_t j=0; j<i;j++) {
+                    for(size_t k=0; k < network->layers[j].num_neurons; k++) {
+                        free(network->layers[j].neurons[k].weights);
+                    }
+                    free(network->layers[j].neurons);
+                }
+                free(network->layer_sizes);
+                free(network->layers);
+                free(network);
+                return NULL;
+            }
         }
+
+        
+
     }
 
 
