@@ -100,7 +100,7 @@ int main() {
 ## Instrucciones de Entrega  
 
 1. **Crear un repositorio en GitHub**:  
-   - Nombre: `quiz2-[tu nombre]` (ej: `quiz2-juan-perez`).  
+   - Nombre: `quiz3-[tu nombre]` (ej: `quiz3-juan-perez`).  
    - Incluir los archivos: `CMakeLists.txt`, `README.md`.
    - Mostrar captura del funcionamiento del programa target 
 
