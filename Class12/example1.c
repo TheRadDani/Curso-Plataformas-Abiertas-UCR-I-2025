@@ -158,13 +158,14 @@ NeuralNetwork* create_neuronal_nertwork(const size_t* layer_sizes, size_t num_la
                 free(network);
                 return NULL;
             }
+
+            /* Initialize weights to random values */
+            for(size_t k=0; k < num_weights; k++) {
+                network->layers[i].neurons[j].weights[k] = ((double)rand() / RAND_MAX) * 0.1 - 0.05; // Random value between -0.05 and 0.05
+            }
         }
-
-        
-
     }
-
-
+    return network;
 }
 
 
