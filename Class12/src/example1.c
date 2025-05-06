@@ -617,6 +617,53 @@ int main() {
             printf("Epoch %d: Error = %.10f\n", epoch + 1, total_error);
         }
     }
+
+    printf("Training complete!\n");
+
+    printf("Testing neural network...\n");
+
+    for(int i=0; i < 4; i++) {
+        double output;
+        if(!predict(network, xor_inputs[i], 2, &output, 1)) {
+            fprintf(stderr, "Prediction failed\n");
+            free_neural_network(network);
+            return ERROR_INVALID_INPUT;
+        }
+        printf("Input: %.1f, %.1f -> Output: %.6f (Expected: %.1f)\n", 
+               xor_inputs[i][0], xor_inputs[i][1], output, xor_outputs[i][0]);
+    }
     
+    /* Save neural netowrk */
+    if(!save_neural_network(network, "xor_network.bin")) {
+        fprintf(stderr, "Failed to save neural network\n");
+        free_neural_network(network);
+        return ERROR_FILE_OPERATION;
+    }
+    printf("Neural network saved to xor_network.bin\n");
+    free_neural_network(network);
+    
+    /* Load neural network */
+    NeuralNetwork* loaded_network = load_neural_network("xor_network.bin");
+    if(loaded_network == NULL) {
+        fprintf(stderr, "Failed to load neural network\n");
+        return ERROR_FILE_OPERATION;
+    }
+
+    printf("Loaded neural network from xor_network.bin\n");
+    for(int i=0; i < 4; i++) {
+        double output;
+        if(!predict(loaded_network, xor_inputs[i], 2, &output, 1)) {
+            fprintf(stderr, "Prediction failed\n");
+            free_neural_network(loaded_network);
+            return ERROR_INVALID_INPUT;
+        }
+        printf("Input: %.1f, %.1f -> Output: %.6f (Expected: %.1f)\n", 
+               xor_inputs[i][0], xor_inputs[i][1], output, xor_outputs[i][0]);
+    }
+    free_neural_network(loaded_network);
+    printf("Neural network loaded and tested successfully!\n");
+    printf("All tests passed!\n");
+    printf("Exiting program...\n");
+
     return 0;
 }
