@@ -93,3 +93,7 @@ void freeHashTable(HashTable* table) {
     free(table->buckets);
     free(table);
 }
+
+int main() {
+    return 0;
+}
