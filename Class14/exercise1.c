@@ -95,5 +95,27 @@ void freeHashTable(HashTable* table) {
 }
 
 int main() {
+    HashTable* table = createHashTable(10);
+    insert(table, 1, 100);
+    insert(table, 2, 200);
+    insert(table, 11, 110); // Collision with key 1
+    insert(table, 12, 120); // Collision with key 2
+    printf("Value for key 1: %d\n", lookup(table, 1));
+    printf("Value for key 2: %d\n", lookup(table, 2));
+    printf("Value for key 11: %d\n", lookup(table, 11));
+    printf("Value for key 1: %d\n", lookup(table, 1));
+    printf("Value for key 12: %d\n", lookup(table, 12));
+
+    delete(table, 1);
+    printf("Value for key 1 after deletion: %d\n", lookup(table, 1));
+   
+    int key = lookup(table, 10000);
+    if (key == -1){
+        printf("Key 10000 not found\n");
+    } else {
+        printf("Key 10000 found\n");
+    }
+
+    freeHashTable(table);
     return 0;
 }
