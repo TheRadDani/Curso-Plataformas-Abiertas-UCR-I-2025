@@ -1,6 +1,38 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct HashNode {
+    int key;
+    struct HashNode* next;
+} HashNode;
+
+
+HashNode* create_hash_node(int key) {
+    HashNode* node = malloc(sizeof(HashNode));
+    node->key = key;
+    node->next = NULL;
+    return node;
+}
+
+int hash(int key) {
+    return abs(key) & 10;
+}
+
+bool hash_insert(HashNode** table, int key) {
+    int idx = hash(key);
+    HashNode* node = table[idx];
+    while (node != NULL) {
+        if (node->key == key) return true; // Key already exists
+        node = node->next;
+    }
+
+    HashNode* new_node = create_hash_node(key);
+    new_node->next = table[idx];
+    table[idx] = new_node;
+    return false; // Key was inserted
+}
 
 typedef struct Node {
     int data;
@@ -47,7 +79,7 @@ void freeList(Node* head) {
 
 int main() {
     Node* head = NULL;
-    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int arr[] = {1, 2, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10};
     int n = sizeof(arr) / sizeof(arr[0]);
     int max_val = 10;
 
