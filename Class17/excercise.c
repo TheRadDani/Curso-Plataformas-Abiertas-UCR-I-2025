@@ -3,6 +3,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define MAX_SIZE 100    
+
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
 typedef struct HashNode {
     int key;
     struct HashNode* next;
@@ -34,10 +42,33 @@ bool hash_insert(HashNode** table, int key) {
     return false; // Key was inserted
 }
 
-typedef struct Node {
-    int data;
-    struct Node* next;
-} Node;
+void find_duplicates(Node* head) {
+    HashNode* hash_table[MAX_SIZE] = {NULL};
+    bool found_duplicates = false;
+
+    Node* current = head;
+    while(current != NULL) {
+        if (hash_insert(hash_table, current->data)) {
+            printf("Duplicate found: %d\n", current->data);
+            found_duplicates = true;
+        }
+        current = current->next;
+    }
+    if (!found_duplicates) {
+        printf("No duplicates found.\n");
+    }
+
+    // Free the hash table
+    for(int i=0; i < MAX_SIZE; i++) {
+        HashNode* node = hash_table[i];
+        while(node != NULL) {
+            HashNode* temp = node;
+            node = node->next;
+            free(temp);
+        }
+    }
+}
+
 
 Node* create_node(int data) {
     Node* node = malloc(sizeof(Node));
@@ -93,6 +124,8 @@ int main() {
 
     printf("Linked List: ");
     printList(head);
+
+    find_duplicates(head);
 
     Node* temp;
     freeList(head);
